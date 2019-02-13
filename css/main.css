@@ -1,1 +1,154 @@
-/* No CSS *//*# sourceMappingURL=main.css.map */
+@charset "UTF-8";
+/*CSS � pratiquer
+
+selecteur de [type=xxx]
+===============================================================================================================
+selecteur enfant (tous enfants, enfant direct)
+===============================================================================================================
+selecteur fr�re (direct et indirect)
+===============================================================================================================
+transition (avec les prefix vendor)
+===============================================================================================================
+simple calc() pour r�agir � la taille de l'�cran
+===============================================================================================================
+pseudo selecteurs (changer la couleur des liens visit�s, ajouter des pseudo elements avec ::before ::after)
+===============================================================================================================
+apprend et utilise flexboxgrid pour l'affichage de l'�cran 
+===============================================================================================================
+apprend et utilise flexbox pour la zone d'affichage principale
+	https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+apprend et utilise data-* pour afficher des infobox
+	https://developer.mozilla.org/fr/docs/Web/HTML/Attributs_universels/data-*
+===============================================================================================================
+utiliser un webfont avec fallback
+===============================================================================================================
+integrer viewport et ins�rer des media query pour certaines resolutions
+    entre 320px et 425px : smartphone
+    entre 425px et 768px : tablettes
+    entre 768px et 1440px : laptop
+    plus de 1440px : desktop et TV
+utiliser entre autre pour background image ou banner image
+*/
+* {
+  border: red 1px solid;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.eventContainer * {
+  font-family: Comfortaa;
+  font-size: 16px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 10;
+  line-height: 20px;
+}
+
+header {
+  text-align: center;
+  font-family: Modern Antiqua;
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 26.4px;
+}
+
+#mainDiv {
+  display: -ms-grid;
+  display: grid;
+  width: 80%;
+  margin: auto;
+}
+
+#mainDiv .eventContainer {
+  background: rgba(53, 117, 177, 0.664);
+  padding-left: 4%;
+  padding-right: 4%;
+  -webkit-transition: 1s;
+  /* Safari */
+  transition: 1s;
+}
+
+#mainDiv .eventContainer h3.eventTitle::before {
+  content: '\25ba';
+  font-weight: 700;
+  color: #500696;
+}
+
+#mainDiv .eventContainer .infoBoxContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  overflow: hidden;
+}
+
+#mainDiv .eventContainer .infoBoxContainer span.left {
+  width: 50%;
+}
+
+#mainDiv .eventContainer .infoBoxContainer span.right {
+  width: 50%;
+  padding-left: 2%;
+}
+
+#mainDiv .eventContainer .infoBoxContainer span > span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#mainDiv .eventContainer .infoBoxContainer img {
+  width: 20px;
+}
+
+#mainDiv .eventContainer .eventDetailsContainer {
+  display: none;
+}
+
+#mainDiv .eventContainer:hover {
+  background: #3575b1;
+}
+
+footer {
+  text-align: center;
+  margin-top: 1%;
+}
+
+#navigation {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+#getDataButton {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#setParameters {
+  -ms-grid-column: 2;
+      grid-column-start: 2;
+  grid-column-end: 4;
+}
+
+#siteDescription {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#appBody {
+  -ms-grid-column: 2;
+      grid-column-start: 2;
+  grid-column-end: 4;
+}
+/*# sourceMappingURL=main.css.map */

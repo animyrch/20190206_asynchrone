@@ -1,53 +1,42 @@
-import $ = require("jquery");
-
-//let testVar:string = "mytest";
-
-//console.log(testVar); 
-
-
+import $ from "jquery";
+import QueryConstructor from "./Class/QueryConstructor";
 
 $(document).ready(function(){
+    
+    let finalUrl:string = "";
+    let baseUrl:string = "https://data.toulouse-metropole.fr/api/records/1.0/search/";
+    
+    let queryConstructor:any = new QueryConstructor;
+    queryConstructor.addQuery(`dataset`, `agenda-des-manifestations-culturelles-so-toulouse`);
+    queryConstructor.addQuery(`q`, `date_debut>"2019-02-01"`);
+    queryConstructor.addQuery(`q`, `gratuit`);
+    queryConstructor.addQuery(`rows`, `100`);
+    queryConstructor.addQuery(`sort`, `date_debut`);
 
-    getEventsJson();
+    finalUrl = queryConstructor.constructUrl(baseUrl);
+    
+    //implementation de fetch avec .then .catch pendant le chargement de la page
+    getDataThen(finalUrl)
+    .then(data => console.log(JSON.stringify(data)))
+    .catch(error => console.log(error));
+
+    //implementation de la même fonction .fetch avec async await suite à l'appuie du bouton
+    let getDataButton = $('#getDataButton');
+    getDataButton.click(()=>
+        getDataAsync(finalUrl)
+        .then(data => console.log(JSON.stringify(data)))
+        .catch(error => console.log(error))
+    );   
 
 });
 
-let getEventsJson = () => {
-//    $("#testDiv").html(testVar);
-    let dateFilter = "date_debut%3E%222019-02-01%22";
-    $.ajax({
-        method: 'GET',
-        url: `https://data.toulouse-metropole.fr/api/records/1.0/search/?dataset=agenda-des-manifestations-culturelles-so-toulouse&q=${dateFilter}`,
-        dataType: 'json',
-        success: onSuccess,
-        error: onError
-    })
-};
-
-let onSuccess = (dataJson:any) => {
-    //$("#testDiv").html("success");    
-    let dataJsonLength:number = dataJson.nhits;
-    dataJson.records.sort((a:any, b:any)=>{
-        let currentA:any = new Date(a.fields.date_debut);
-        let currentB:any = new Date(b.fields.date_debut);
-        return currentB - currentA;
-    });
-    dataJson.records.map(displayEvents);
-    
-    
-    
-};
-let onError = () => {
-    $("#testDiv").html("error");
-};
-
-let sortResults = (element:string, bucket:JSON) => {
+let getDataAsync = async function (url = ``){
+    return await fetch(url)
+    .then(contenu => contenu.json());
 
 };
 
-let displayEvents = (eventsBucketElement:any) => {
-//    $("#testDiv").append(eventsBucket[i].fields.date_debut);
-    console.log(eventsBucketElement.fields.date_debut);
-    $("#testDiv").append(eventsBucketElement.fields.date_debut);
-
+let getDataThen = (url = ``) => {
+    return fetch(url)
+    .then(response => response.json());
 };

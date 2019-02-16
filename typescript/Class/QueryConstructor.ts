@@ -4,6 +4,7 @@ interface toulouseOpenDataQuery {
     rows:string,
     sort:string,
 };
+let baseURL:string = "https://data.toulouse-metropole.fr/api/records/1.0/search/";
 
 export default class QueryConstructor {
     private _queries:toulouseOpenDataQuery = {
@@ -22,10 +23,22 @@ export default class QueryConstructor {
 
     public addQuery(queryName:string, query = ``){
         let currentQuery:any = this._queries;
-        currentQuery[queryName] = (queryName === 'q') ? `${currentQuery[queryName]}${query} ` : query;
+        currentQuery[queryName] = query;
     }
 
-    public constructUrl = (baseURL: string):string => {
+    public toggleFilterForFree(){
+        let currentQuery:any = this._queries;
+        let currentQQuery: string = currentQuery['q'];
+        if(currentQQuery.includes("gratuit")){
+            
+            let newQQuery = currentQQuery.replace('gratuit', '');
+            this.addQuery(`q`, newQQuery);
+        }else{
+            currentQuery['q'] += " gratuit";
+        }
+       
+    }
+    public constructUrl = ():string => {
         return `${baseURL}?${this.constructQuery(this.queries)}`;
     }
 

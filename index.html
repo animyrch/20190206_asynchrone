@@ -6,20 +6,28 @@
   <script data-main="dist/app" src="dist/require.js"></script>
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Modern+Antiqua" />
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Comfortaa" /><link rel='stylesheet' href='//fonts.googleapis.com/css?family=Copse' type='text/css' /> 
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-  <header>
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Copse" />Evennements Culturels A Toulouse</header>
-  <div id="setParameters">Parameter configuration goes here</div>
-  <button id="getDataButton">Get Data Button</button>
+  <header>Evenements Culturels A Toulouse</header>
+  <hr>
+  <fieldset id="setParameters">
+    <div id="dateSelection">A partir de <input type="date" id="date-input" name="date" value="2019-01-01"></div> 
+    <div id="resultAmountSelection">
+      <label for="resultAmount">Nombre maximal de résultats</label>
+      <input id="resultAmount" type="number" style="width:60px;" min="1" value="10">
+    </div>
+    <div id="freeEventSelection">
+      <label for="filterForFree">Filtrer pour le mot "gratuit"</label>
+      <input type="checkbox" name="gratuit" id="filterForFree">
+    </div>
+  </fieldset> 
   <div id="mainDiv">
     
   </div>
   <footer>Données obtenues à partir de <a target="_blank" href="https://data.toulouse-metropole.fr/pages/accueil/">la Portail Open Data de Toulouse-Métropole</a></footer>
   
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="vendor/jquery.js"></script>
   <script type="text/javascript" src="dist/app.js"> </script>
 </body>
 </html>

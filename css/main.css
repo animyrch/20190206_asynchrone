@@ -30,18 +30,19 @@ integrer viewport et ins�rer des media query pour certaines resolutions
 utiliser entre autre pour background image ou banner image
 */
 * {
-  border: red 1px solid;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-}
-
-.eventContainer * {
   font-family: Comfortaa;
   font-size: 16px;
   font-style: normal;
   font-variant: normal;
   font-weight: 10;
   line-height: 20px;
+}
+
+span {
+  padding-left: 1%;
+  padding-right: 1%;
 }
 
 header {
@@ -52,6 +53,38 @@ header {
   font-variant: normal;
   font-weight: 700;
   line-height: 26.4px;
+}
+
+#setParameters {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  text-align: center;
+}
+
+#setParameters #dateSelection {
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+}
+
+#setParameters #resultAmountSelection {
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+}
+
+#setParameters #freeEventSelection {
+  -webkit-box-ordinal-group: 4;
+      -ms-flex-order: 3;
+          order: 3;
 }
 
 #mainDiv {
@@ -68,6 +101,7 @@ header {
   -webkit-transition: 1s;
   /* Safari */
   transition: 1s;
+  border-left: solid 10px #2196f3;
 }
 
 #mainDiv .eventContainer h3.eventTitle::before {
@@ -109,12 +143,16 @@ header {
   width: 20px;
 }
 
-#mainDiv .eventContainer .eventDetailsContainer {
+#mainDiv .eventContainer .eventDetailsContainer p {
+  display: block;
+}
+
+#mainDiv .eventContainer .eventDetailsContainer p.hidden {
   display: none;
 }
 
 #mainDiv .eventContainer:hover {
-  background: #3575b1;
+  background: #2196f3;
 }
 
 footer {
@@ -150,5 +188,14 @@ footer {
   -ms-grid-column: 2;
       grid-column-start: 2;
   grid-column-end: 4;
+}
+
+@media screen and (max-width: 900px) {
+  #setParameters {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
 /*# sourceMappingURL=main.css.map */

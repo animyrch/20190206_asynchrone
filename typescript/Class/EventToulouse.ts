@@ -3,7 +3,7 @@ export default class EventToulouse{
 
     static displayEventDetails(details:any):void{
         let detailsContainer = details.fields;
-        console.log(detailsContainer);
+        //console.log(detailsContainer);
 
         //nullchecks
         let eventDescriptionCourt = (typeof detailsContainer.descriptif_court === "undefined" ? `` : detailsContainer.descriptif_court);
@@ -28,7 +28,7 @@ export default class EventToulouse{
         detailsHTML +=         `<span><img src="assets/credit-card-regular.svg" alt="image-prix"></span>`;
         detailsHTML +=         `<span class="right eventPrice"><span>${eventTarifNormal}</span></span>`;
         detailsHTML +=      `</div>`;
-        detailsHTML +=         `<p class="eventDescription">${eventDescriptifLong}</p>`;
+        detailsHTML +=         `<p class="eventDescription hidden">${eventDescriptifLong}</p>`;
         detailsHTML +=     `</div>`;
         detailsHTML += `</div>`;
         detailsHTML += `<hr>`;

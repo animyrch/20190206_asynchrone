@@ -1,53 +1,54 @@
 import $ from "jquery";
 import QueryConstructor from "./Class/QueryConstructor";
+import { onClickEventContainer, onChangeStartDate, onChangeStateFree, onChangeNumberMaxResults } from "./events";
+import { getCurrentDateFrench, getDataAsync, getDataThen } from "./tools";
 import EventToulouse from "./Class/EventToulouse";
 
+
 $(document).ready(function(){
-    
+    //date par défaut
+    $('input[type="date"]').val(getCurrentDateFrench());
     let finalUrl:string = "";
-    let baseUrl:string = "https://data.toulouse-metropole.fr/api/records/1.0/search/";
     
     let queryConstructor:any = new QueryConstructor;
     queryConstructor.addQuery(`dataset`, `agenda-des-manifestations-culturelles-so-toulouse`);
-    queryConstructor.addQuery(`q`, `date_debut>"2019-02-01"`);
-    //queryConstructor.addQuery(`q`, `gratuit`);
     queryConstructor.addQuery(`rows`, `100`);
     queryConstructor.addQuery(`sort`, `date_debut`);
+    queryConstructor.addQuery(`q`, `date_debut>${getCurrentDateFrench()}`);
 
-    finalUrl = queryConstructor.constructUrl(baseUrl);
+
     
+    finalUrl = queryConstructor.constructUrl();
     //implementation de fetch avec .then .catch pendant le chargement de la page
-    getDataThen(finalUrl)
-    .then(data => putDataOnScreen(data))
-    .catch(error => console.log(error));
+    getDataThen(finalUrl);
 
-    //implementation de la même fonction .fetch avec async await suite à l'appuie du bouton
-    let getDataButton = $('#getDataButton');
-    getDataButton.click(()=>
-        getDataAsync(finalUrl)
-        .then(data => putDataOnScreen(data))
-        .catch(error => console.log(error))
-    );   
+    
 
+    //user events
+    $("#mainDiv").on("click", "div.eventContainer", function(this:any){
+        onClickEventContainer(this);
+    });
+
+    $('input[type="date"]').on('change', function(this:any){
+        onChangeStartDate(this, queryConstructor);
+    });
+
+    $("input[type=checkbox]").on("change", ()=>onChangeStateFree(queryConstructor));
+    
+
+    $("input[type=number").on('change', function(this:any){
+        //console.log(this.value());
+        onChangeNumberMaxResults(this, queryConstructor);
+    });
 });
 
-let getDataAsync = async function (url = ``){
-    return await fetch(url)
-    .then(contenu => contenu.json());
 
-};
 
-let getDataThen = (url = ``) => {
-    return fetch(url)
-    .then(response => response.json());
-};
 
-let putDataOnScreen = (data:any):void => {
+export let putDataOnScreen = (data:any):void => {
     $('#mainDiv').html("");
     data.records.map(EventToulouse.displayEventDetails);
     
 };
 
 
-//TODO when on click on a given  .eventContainer, .eventDetailsContainer becomes visible
-//TODO integrate adjustable parameters
